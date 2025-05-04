@@ -1,0 +1,24 @@
+spring:
+  rabbitmq:
+    host: localhost
+    port: 5672
+    username: guest
+    password: guest
+    template:
+      exchange: pedido.exchange  # Adicione esta linha para configurar a exchange padrão
+
+app:
+  rabbitmq:
+    queues:
+      criado: pedido.criado.queue  # Nome da fila como variável de configuração
+      deletado: pedido.deletado.queue
+
+cliente-service:
+  base-url: http://localhost:8083/cliente
+
+logging:
+  level:
+    org.springframework.cloud.openfeign: DEBUG
+    org.springframework.web: DEBUG
+    org.hibernate.SQL: DEBUG
+    com.tcc.pedido_service: DEBUG
