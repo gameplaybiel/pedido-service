@@ -13,8 +13,8 @@ app:
       criado: pedido.criado.queue  # Nome da fila como variável de configuração
       deletado: pedido.deletado.queue
 
-cliente-service:
-  base-url: http://localhost:8083/cliente
+pagamento-service:
+  base-url: http://localhost:8085/pagamento
 
 logging:
   level:

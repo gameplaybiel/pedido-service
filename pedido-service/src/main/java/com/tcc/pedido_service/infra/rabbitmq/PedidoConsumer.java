@@ -8,7 +8,7 @@ public class PedidoConsumer {
     @RabbitListener(queues = RabbitMQConfig.PEDIDO_CRIADO_QUEUE)
     public void receberPedidoCriado(PedidoCriadoEvent event) {
         System.out.println("📦 Pedido recebido - ID: " + event.getPedidoId());
-        System.out.println("👤 Cliente ID: " + event.getClienteId());
+        System.out.println("👤 Pagamento ID: " + event.getPagamentoId());
         System.out.println("💵 Valor: " + event.getValor());
     }
 

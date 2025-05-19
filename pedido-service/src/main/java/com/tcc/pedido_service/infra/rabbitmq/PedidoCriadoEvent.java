@@ -5,7 +5,7 @@ import java.math.BigDecimal;
 
 public class PedidoCriadoEvent implements Serializable {
     private Long pedidoId;
-    private Long clienteId;
+    private Long pagamentoId;
     private String descricao;
     private BigDecimal valor;
     private String status; // Ex: "CRIADO", "PROCESSANDO"
@@ -15,9 +15,9 @@ public class PedidoCriadoEvent implements Serializable {
     }
 
     // Construtor com campos
-    public PedidoCriadoEvent(Long pedidoId, Long clienteId, String descricao, BigDecimal valor) {
+    public PedidoCriadoEvent(Long pedidoId, Long pagamentoId, String descricao, BigDecimal valor) {
         this.pedidoId = pedidoId;
-        this.clienteId = clienteId;
+        this.pagamentoId = pagamentoId;
         this.descricao = descricao;
         this.valor = valor;
         this.status = "CRIADO"; // Valor padrão
@@ -31,12 +31,12 @@ public class PedidoCriadoEvent implements Serializable {
         this.pedidoId = pedidoId;
     }
 
-    public Long getClienteId() {
-        return clienteId;
+    public Long getPagamentoId() {
+        return pagamentoId;
     }
 
-    public void setClienteId(Long clienteId) {
-        this.clienteId = clienteId;
+    public void setPagamentoId(Long pagamentoId) {
+        this.pagamentoId = pagamentoId;
     }
 
     public String getDescricao() {
