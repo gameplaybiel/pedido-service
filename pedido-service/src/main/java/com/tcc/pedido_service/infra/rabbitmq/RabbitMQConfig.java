@@ -7,19 +7,28 @@ import org.springframework.context.annotation.Configuration;
 
 @Configuration
 public class RabbitMQConfig {
-    @Value("${pedido.queue.name}")
-    private String pedidoQueueName;
+    @Value("${pedido.queue}")
+    private String pedidoQueue;
 
-    @Value("${pagamento.queue.name}")
-    private String pagamentoQueueName;
+    @Value("${pagamento.queue}")
+    private String pagamentoQueue;
+
+    @Value("${cliente.queue}")  // Adicione se for usar
+    private String clienteQueue;
 
     @Bean
     Queue pedidoQueue() {
-        return new Queue(pedidoQueueName, true);
+        return new Queue(pedidoQueue, true);  // Fila durável
     }
 
     @Bean
     Queue pagamentoQueue() {
-        return new Queue(pagamentoQueueName, true);
+        return new Queue(pagamentoQueue, true);
+    }
+
+    // Opcional: Se precisar da fila do cliente
+    @Bean
+    Queue clienteQueue() {
+        return new Queue(clienteQueue, true);
     }
 }

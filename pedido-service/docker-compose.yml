@@ -13,7 +13,7 @@ services:
   postgres-cliente:
     image: postgres:13
     environment:
-      POSTGRES_USER: cliente
+      POSTGRES_USER: postgres
       POSTGRES_PASSWORD: gabriel18
       POSTGRES_DB: cliente_db
     ports:
@@ -24,7 +24,7 @@ services:
   postgres-pedido:
     image: postgres:13
     environment:
-      POSTGRES_USER: pedido
+      POSTGRES_USER: postgres
       POSTGRES_PASSWORD: gabriel18
       POSTGRES_DB: pedido_db
     ports:
@@ -35,7 +35,7 @@ services:
   postgres-pagamento:
     image: postgres:13
     environment:
-      POSTGRES_USER: pagamento
+      POSTGRES_USER: postgres
       POSTGRES_PASSWORD: gabriel18
       POSTGRES_DB: pagamento_db
     ports:

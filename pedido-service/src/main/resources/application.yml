@@ -1,0 +1,26 @@
+spring:
+  datasource:
+    url: jdbc:postgresql://localhost:5432/pedido_db
+    username: postgres
+    password: gabriel18
+  jpa:
+    database-platform: org.hibernate.dialect.PostgreSQLDialect
+    hibernate:
+      ddl-auto: update
+  rabbitmq:
+    host: localhost  # ou "rabbitmq" se estiver usando Docker
+    port: 5672
+    username: guest
+    password: guest
+
+# Nomes das filas
+pedido:
+  queue: pedido.criado.queue
+pagamento:
+  queue: pagamento.processado.queue
+cliente:
+  queue: cliente.criado.queue
+
+logging:
+  level:
+    org.springframework: DEBUG
