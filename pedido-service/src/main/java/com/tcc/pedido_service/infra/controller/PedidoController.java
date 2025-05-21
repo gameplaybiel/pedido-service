@@ -4,7 +4,6 @@ import com.tcc.pedido_service.application.dto.PagamentoRequestDTO;
 import com.tcc.pedido_service.application.dto.PedidoDTO;
 import com.tcc.pedido_service.application.usecase.PedidoUseCase;
 import com.tcc.pedido_service.domain.model.Pedido;
-import com.tcc.pedido_service.infra.rabbitmq.PedidoEventPublisher;
 import jakarta.validation.Valid;
 import org.springframework.http.*;
 import org.springframework.web.bind.annotation.*;
@@ -16,13 +15,11 @@ import java.util.List;
 @RequestMapping("/pedido")
 public class PedidoController {
     private final PedidoUseCase pedidoUseCase;
-    private final PedidoEventPublisher eventPublisher;
     private final RestTemplate restTemplate;
     private final String PAGAMENTO_SERVICE_URL = "http://localhost:8085/pagamento";
 
-    public PedidoController(PedidoUseCase pedidoUseCase, PedidoEventPublisher eventPublisher, RestTemplate restTemplate) {
+    public PedidoController(PedidoUseCase pedidoUseCase, RestTemplate restTemplate) {
         this.pedidoUseCase = pedidoUseCase;
-        this.eventPublisher = eventPublisher;
         this.restTemplate = restTemplate;
     }
 
@@ -55,7 +52,6 @@ public class PedidoController {
 
             // Se o pagamento foi criado com sucesso (HTTP 2xx)
             if (response.getStatusCode().is2xxSuccessful()) {
-                eventPublisher.publicarPedidoCriado(pedido);
                 return ResponseEntity.status(HttpStatus.CREATED).body(pedido);
             } else {
                 // Se falhar, cancela o pedido (rollback)
@@ -86,7 +82,6 @@ public class PedidoController {
     public ResponseEntity<Void> deletarPedido(@PathVariable Long id) {
         try {
             pedidoUseCase.deletarPedido(id);
-            eventPublisher.publicarPedidoDeletado(id);  // Publica evento de deleção
             return ResponseEntity.noContent().build();
         } catch (RuntimeException e) {
             return ResponseEntity.notFound().build();
