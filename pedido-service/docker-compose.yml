@@ -1,10 +1,49 @@
+version: '3.8'
+
 services:
-  rabbitmq_2:
+  rabbitmq:
     image: rabbitmq:3-management
-    container_name: rabbitmq_3
     ports:
       - "5672:5672"
       - "15672:15672"
     environment:
       RABBITMQ_DEFAULT_USER: guest
-      RABBITMQ_DEFAULT_PASSWORD: guest
+      RABBITMQ_DEFAULT_PASS: guest
+
+  postgres-cliente:
+    image: postgres:13
+    environment:
+      POSTGRES_USER: cliente
+      POSTGRES_PASSWORD: gabriel18
+      POSTGRES_DB: cliente_db
+    ports:
+      - "5432:5432"
+    volumes:
+      - cliente-data:/var/lib/postgresql/data
+
+  postgres-pedido:
+    image: postgres:13
+    environment:
+      POSTGRES_USER: pedido
+      POSTGRES_PASSWORD: gabriel18
+      POSTGRES_DB: pedido_db
+    ports:
+      - "5433:5432"
+    volumes:
+      - pedido-data:/var/lib/postgresql/data
+
+  postgres-pagamento:
+    image: postgres:13
+    environment:
+      POSTGRES_USER: pagamento
+      POSTGRES_PASSWORD: gabriel18
+      POSTGRES_DB: pagamento_db
+    ports:
+      - "5434:5432"
+    volumes:
+      - pagamento-data:/var/lib/postgresql/data
+
+volumes:
+  cliente-data:
+  pedido-data:
+  pagamento-data:
