@@ -28,7 +28,7 @@ services:
       POSTGRES_PASSWORD: gabriel18
       POSTGRES_DB: pedido_db
     ports:
-      - "5432:5432"
+      - "5433:5432"
     volumes:
       - pedido-data:/var/lib/postgresql/data
 
@@ -39,7 +39,7 @@ services:
       POSTGRES_PASSWORD: gabriel18
       POSTGRES_DB: pagamento_db
     ports:
-      - "5432:5432"
+      - "5434:5432"
     volumes:
       - pagamento-data:/var/lib/postgresql/data
 
